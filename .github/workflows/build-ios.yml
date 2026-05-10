@@ -33,14 +33,32 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Build iOS (no codesign)
+      - name: Generate Xcode project (no build yet)
+        run: flutter build ios --release --no-codesign --config-only
+
+      - name: Build via xcodebuild (no codesign)
+        working-directory: ios
         run: |
-          flutter build ios --release --no-codesign
+          xcodebuild \
+            -workspace Runner.xcworkspace \
+            -scheme Runner \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build/derived \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            DEVELOPMENT_TEAM="" \
+            -allowProvisioningUpdates \
+            build
 
       - name: Pack unsigned .ipa
         run: |
+          APP_PATH=$(find ios/build/derived/Build/Products/Release-iphoneos -maxdepth 1 -name "*.app" -type d | head -1)
+          [ -z "$APP_PATH" ] && APP_PATH=$(find build/ios/iphoneos -maxdepth 1 -name "*.app" -type d | head -1)
+          echo "APP: $APP_PATH"
           mkdir -p Payload
-          cp -R build/ios/iphoneos/Runner.app Payload/Extis.app || cp -R build/ios/iphoneos/*.app Payload/Extis.app
+          cp -R "$APP_PATH" Payload/Extis.app
           zip -qr Extis-unsigned.ipa Payload
           ls -lh Extis-unsigned.ipa
 
