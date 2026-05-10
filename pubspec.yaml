@@ -6,7 +6,7 @@ publish_to: "none"
 version: 5.1.1+44
 
 homepage: https://extis.krtirtho.dev
-repository: https://github.com/KRTirtho/extis
+repository: https://github.com/KRTirtho/spotube
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -134,9 +134,9 @@ dependencies:
     git:
       url: https://github.com/hetu-community/hetu_otp_util.git
       ref: main
-  hetu_extis_plugin:
+  hetu_spotube_plugin:
     git:
-      url: https://github.com/KRTirtho/hetu_extis_plugin.git
+      url: https://github.com/KRTirtho/hetu_spotube_plugin.git
       ref: main
   get_it: ^8.0.3
   flutter_markdown_plus: ^1.0.3
@@ -238,7 +238,7 @@ flutter:
     # hetu script bytecode
     - packages/hetu_std/assets/bytecode/std.out
     - packages/hetu_otp_util/assets/bytecode/otp_util.out
-    - packages/hetu_extis_plugin/assets/bytecode/extis_plugin.out
+    - packages/hetu_spotube_plugin/assets/bytecode/spotube_plugin.out
     # NewPipe binaries (desktop only)
     # - packages/flutter_new_pipe_extractor/assets/
   fonts:

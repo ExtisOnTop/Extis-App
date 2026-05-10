@@ -3,8 +3,8 @@ import 'dart:typed_data';
 import 'package:auto_route/auto_route.dart';
 import 'package:hetu_otp_util/hetu_otp_util.dart';
 import 'package:hetu_script/hetu_script.dart';
-import 'package:hetu_extis_plugin/hetu_extis_plugin.dart' as extis_plugin;
-import 'package:hetu_extis_plugin/hetu_extis_plugin.dart'
+import 'package:hetu_spotube_plugin/hetu_spotube_plugin.dart' as spotube_plugin;
+import 'package:hetu_spotube_plugin/hetu_spotube_plugin.dart'
     hide YouTubeEngine;
 import 'package:hetu_std/hetu_std.dart';
 import 'package:pub_semver/pub_semver.dart';
@@ -82,7 +82,7 @@ class MetadataPlugin {
         );
       },
       createYoutubeEngine: () {
-        return extis_plugin.YouTubeEngine(
+        return spotube_plugin.YouTubeEngine(
           search: (query) async {
             final result = await youtubeEngine.searchVideos(query);
             return result

@@ -1,4 +1,4 @@
-import 'package:hetu_extis_plugin/hetu_extis_plugin.dart';
+import 'package:hetu_spotube_plugin/hetu_spotube_plugin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesLocalStorage implements Localstorage {
