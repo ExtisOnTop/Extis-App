@@ -1,0 +1,46 @@
+name: Build iOS (unsigned, AltStore .ipa)
+
+on:
+  push:
+    branches: [ main, master, extis ]
+  workflow_dispatch:
+
+jobs:
+  ios:
+    runs-on: macos-14
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.29.x
+
+      - name: Set up Cocoapods
+        run: |
+          gem install cocoapods --no-document
+          flutter --version
+          flutter doctor
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build iOS (no codesign)
+        run: |
+          flutter build ios --release --no-codesign
+
+      - name: Pack unsigned .ipa
+        run: |
+          mkdir -p Payload
+          cp -R build/ios/iphoneos/Runner.app Payload/Extis.app || cp -R build/ios/iphoneos/*.app Payload/Extis.app
+          zip -qr Extis-unsigned.ipa Payload
+          ls -lh Extis-unsigned.ipa
+
+      - name: Upload .ipa artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Extis-unsigned-ipa
+          path: Extis-unsigned.ipa
+          retention-days: 30

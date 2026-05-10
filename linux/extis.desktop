@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Extis
+Exec=/usr/bin/extis
+Icon=/usr/share/icons/extis/extis-logo.png
+Comment=A music streaming app combining the power of music metadata providers & YouTube
+Terminal=false
+Categories=Audio;Music;Player;AudioVideo;
+# MimeType=x-scheme-handler/spotify;
