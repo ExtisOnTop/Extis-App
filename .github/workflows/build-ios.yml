@@ -43,7 +43,7 @@ jobs:
             -workspace Runner.xcworkspace \
             -scheme Runner \
             -configuration Release \
-            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
             -derivedDataPath build/derived \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
